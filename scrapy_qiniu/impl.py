@@ -173,3 +173,14 @@ class QiniuPipeline(FilesPipeline):
 
     def file_downloaded(self, response, request, info):
         return json.loads(response.body)['hash']
+
+    def item_completed(self, results, item, info):
+        def process_result(result):
+            data = json.loads(result['path'])
+            result['bucket'] = data['bucket']
+            result['key'] = data['key']
+            return result
+
+        if isinstance(item, dict) or self.FILES_RESULT_FIELD in item.fields:
+            item[self.FILES_RESULT_FIELD] = [process_result(x) for ok, x in results if ok]
+        return item
