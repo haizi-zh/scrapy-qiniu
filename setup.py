@@ -13,7 +13,7 @@ Scrapy中的media pipeline机制，可以方便地将静态资源资源（文件
 """
 
 setup(name='scrapy_qiniu',
-      version='0.1.1',
+      version='0.1.2',
       description='Scrapy pipeline extension for qiniu.com',
       long_description=LONGDOC,
       author='Zephyre',
